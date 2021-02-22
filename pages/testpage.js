@@ -1,20 +1,25 @@
 import fetchPublicRepos from "../api/github";
-
-const getrepos = async () => {
-  const data = await fetchPublicRepos();
-  //const aData = Object.values(data);
-  return data;
-};
+import React from "react";
 
 export default function Test() {
-  const data = getrepos();
-  console.log(data);
-  //return <pre>{JSON.stringify(data, null, 2)}</pre>;
-  return (
-    <div>
-      {/* {data.map((repos) => (
-        <p>{repos.full_name}</p>
-      ))} */}
-    </div>
-  );
+  const { data, isError, isLoading } = fetchPublicRepos();
+  console.log('1111111 ', data, isError, ' loading? ', isLoading);
+
+    return (
+        <div>
+            {
+                isLoading ?
+                    <p>
+                        Nothing to see here.
+                    </p> :
+                    data.map(item =>
+                        <div>
+                            <h2> { item.owner.login } </h2>
+                            <p> { item.name } </p>
+                            <p> { item.updated_at } </p>
+                        </div>
+                    )
+            }
+        </div>
+    )
 }
