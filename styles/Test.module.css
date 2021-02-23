@@ -1,0 +1,17 @@
+.requests {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.items {
+  margin: auto;
+  width: 50%;
+  border: 1px solid green;
+  padding: 10px;
+  text-align: center;
+}
+
+.ownerTitle {
+  text-align: center;
+}
