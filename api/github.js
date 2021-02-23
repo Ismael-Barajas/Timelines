@@ -1,14 +1,13 @@
 import useSWR from "swr";
-import axios from "axios";
 
-const testurl = "https://api.github.com/users/Ismael-Barajas/repos";
-
+const testName = "Ismael-Barajas";
 const ratelimitURL = "https://api.github.com/rate_limit";
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export function fetchPublicRepos() {
-  const { data, error } = useSWR(testurl, fetcher, {
+  const url = `https://api.github.com/users/${testName}/repos`;
+  const { data, error } = useSWR(url, fetcher, {
     revalidateOnFocus: false,
   });
 
@@ -23,27 +22,3 @@ export function rateLimit() {
   const { data, error } = useSWR(ratelimitURL, fetcher);
   return data;
 }
-
-// const fetchPublicReposSWR = () => {
-//   let usernameUrl = testurl;
-//   try {
-//     const { data, error } = useSWR(usernameUrl, fetcher);
-//     console.log(data);
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-//
-// const fetchPublicRepos = async () => {
-//   let usernameUrl = testurl;
-//   try {
-//     const data = await axios.get(usernameUrl);
-//     console.log(data);
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-//export default fetchPublicRepos;
