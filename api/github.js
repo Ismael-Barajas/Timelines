@@ -3,16 +3,25 @@ import axios from "axios";
 
 const testurl = "https://api.github.com/users/Ismael-Barajas/repos";
 
-const fetcher = (...args) => fetch(...args).then(response => response.json());
+const ratelimitURL = "https://api.github.com/rate_limit";
 
-function fetchPublicRepos() {
-  const { data, error } = useSWR(testurl, fetcher);
+const fetcher = (...args) => fetch(...args).then((response) => response.json());
+
+export function fetchPublicRepos() {
+  const { data, error } = useSWR(testurl, fetcher, {
+    revalidateOnFocus: false,
+  });
 
   return {
     data,
     isError: error,
     isLoading: !error && !data,
-  }
+  };
+}
+
+export function rateLimit() {
+  const { data, error } = useSWR(ratelimitURL, fetcher);
+  return data;
 }
 
 // const fetchPublicReposSWR = () => {
@@ -37,4 +46,4 @@ function fetchPublicRepos() {
 //   }
 // };
 
-export default fetchPublicRepos;
+//export default fetchPublicRepos;
