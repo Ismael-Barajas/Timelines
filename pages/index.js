@@ -11,41 +11,32 @@ const SearchPage = () => {
   // Prop function passed to searchbar
   const search = (searchValue) => {
     const url = `https://api.github.com/users/${searchValue}/repos`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        if (json) {
-          console.log("got json response ", json);
+    fetch(url).then(response => response.json()).then(json => {
+      if (json) {
+        if (json.length) {
           setActivitiesList(json);
-        } else if (json && json.message) {
-          // receive back some json error message
-          setError(json.message);
-          console.log("No user found ");
+          setError('');
+        } else if (json.message || !json.length) {
+          // receive back some json error message or user has no data to show
+          const errorMessage = json.message ? json.message : `${searchValue} has no GitHub activity to show`;
+          setError(errorMessage);
+          setActivitiesList([]);
         }
-      });
-  };
+      }
+    })
+  }
 
   return (
-    <div>
-      <SearchBar search={search} />
-      <Timeline data={activitiesList} />
-      {/* <div>
-        <h1 className={styles.ownerTitle}>{ownerName}</h1>
-        {activitiesList.map((item, index) => (
-          <div className={styles.items} key={index}>
-            <h2> {item.name} </h2>
-            {item.description && (
-              <p>
-                <b>Description: </b>
-                {item.description}
-              </p>
-            )}
-            <p> {item.updated_at} </p>
-          </div>
-        ))}
-      </div> */}
-    </div>
-  );
-};
+      <div>
+        <SearchBar search={search} />
+        {
+          error ?
+              <div>
+                <h1>{error}</h1>
+              </div> : <Timeline data={activitiesList} />
+        }
+      </div>
+  )
+}
 
 export default SearchPage;
