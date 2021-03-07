@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./Components/searchbar";
-import styles from "../styles/Test.module.css";
+import Timeline from "./Components/timeline";
 
 const SearchPage = () => {
   // activities list to pass to timeline component
@@ -14,7 +14,7 @@ const SearchPage = () => {
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
-        if (json && json.length) {
+        if (json) {
           console.log("got json response ", json);
           setActivitiesList(json);
         } else if (json && json.message) {
@@ -25,15 +25,11 @@ const SearchPage = () => {
       });
   };
 
-  const ownerName =
-    activitiesList && activitiesList.length && activitiesList[0].owner.login
-      ? activitiesList[0].owner.login
-      : "";
-
   return (
     <div>
       <SearchBar search={search} />
-      <div>
+      <Timeline data={activitiesList} />
+      {/* <div>
         <h1 className={styles.ownerTitle}>{ownerName}</h1>
         {activitiesList.map((item, index) => (
           <div className={styles.items} key={index}>
@@ -47,7 +43,7 @@ const SearchPage = () => {
             <p> {item.updated_at} </p>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
