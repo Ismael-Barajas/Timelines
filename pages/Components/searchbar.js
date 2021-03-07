@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 const SearchBar = (props) => {
     const [searchValue, setSearchValue] = useState('');
-    const BarStyles = { width: '20rem', background: '#F2F1F9', border: 'none', padding: '0.5rem' }
+    const BarStyles = {
+        width: '20rem',
+        background: '#F2F1F9',
+        border: 'none',
+        padding: '0.5rem',
+    }
 
     const handleInputOnChange = (e) => {
         setSearchValue(e.target.value);

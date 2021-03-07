@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/Test.module.css";
 import TimeLines from "@material-ui/lab/Timeline";
 import {
   TimelineItem,
@@ -11,7 +10,7 @@ import {
 
 const Timeline = (props) => {
   const timelineData = props.data;
-  console.log(timelineData.data, timelineData.length);
+  // console.log(timelineData.data, timelineData.length);
 
   if (timelineData && !timelineData.length) {
     return null;
@@ -24,7 +23,7 @@ const Timeline = (props) => {
 
   return (
     <div>
-      <h1 className={styles.ownerTitle}>{ownerName}</h1>
+      <h1 className={'ownerTitle'}>{ownerName}</h1>
       <TimeLines align="alternate">
         {timelineData.map((item, index) => (
           <TimelineItem>
@@ -32,8 +31,8 @@ const Timeline = (props) => {
               <TimelineDot />
               <TimelineConnector />
             </TimelineSeparator>
-            <TimelineContent>
-              <div key={index}>
+            <TimelineContent key={index}>
+              <div>
                 <h2> {item.name} </h2>
                 {item.description && (
                   <p>
