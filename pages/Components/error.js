@@ -1,39 +1,26 @@
-class ErrorBoundary extends React.Component 
-{
-    /*
-       props : stands for properties and is used to pass data from one
-        component to another 
-    */
-    constructor(props) 
-    {
-        super(props);
-        this.props = {errorMessage};
+//create a error component when user does not exist
+
+
+
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props);
+      this.props = {errorMessage};
     }
-
-
-    /*
-       componentDidCatch() : called during "commit" phase
-         >it is used for things like logging errors
-       error : error that was thrown 
-       info : object which contains a trace of where the error occurred
-    */
+    //checks if component catched an error 
     componentDidCatch(error, errorInfo) {
-        /*
-          setState() changes to the component state and tells React 
-            that this component and its children needs to be 
-            re-rendered with the update state
-        */
-        this.props({ errorMessage: true });
-        logErrorToMyService(error, errorInfo);
-        // console.log(error);
-        // console.log(errorInfo);
+      // Display fallback UI
+      //if componenet has an error State changes to True
+      this.props({errorMessage});
+      // You can also log the error to an error reporting service
+      logErrorToMyService(error, errorInfo);
     }
-
-
-    render() 
-    {
-        if (errorMessage) {
-            return errorMessage;
-        }
+  
+    render() {
+      //if the state has an error return a message to the user 
+      if (errorMessage) {
+        // You can render any custom fallback UI
+        return errorMessage;
+      }
     }
-}
+  }

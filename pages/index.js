@@ -1,65 +1,42 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import React, { useState, useEffect } from "react";
+import SearchBar from "./Components/searchbar";
+import Timeline from "./Components/timeline";
 
-export default function Home() {
+const SearchPage = () => {
+  // activities list to pass to timeline component
+  const [activitiesList, setActivitiesList] = useState([]);
+  // state for setting error messages returned - pass to error component
+  const [error, setError] = useState("");
+
+  // Prop function passed to searchbar
+  const search = (searchValue) => {
+    const url = `https://api.github.com/users/${searchValue}/repos`;
+    fetch(url).then(response => response.json()).then(json => {
+      if (json) {
+        if (json.length) {
+          setActivitiesList(json);
+          setError('');
+        } else if (json.message || !json.length) {
+          // receive back some json error message or user has no data to show
+          const errorMessage = json.message ? json.message : `${searchValue} has no GitHub activity to show`;
+          setError(errorMessage);
+          setActivitiesList([]);
+        }
+      }
+    })
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  );
+      <div>
+        <SearchBar search={search} />
+        {
+          error ?
+              <div>
+                <h1>{error}</h1>
+              </div> : <Timeline data={activitiesList} />
+        }
+      </div>
+  )
 }
+
+export default SearchPage;
