@@ -10,8 +10,6 @@ class ErrorBoundary extends React.Component {
     //checks if component catched an error 
     componentDidCatch(error, errorInfo) {
       // Display fallback UI
-      //if componenet has an error State changes to True
-      this.props({errorMessage});
       // You can also log the error to an error reporting service
       logErrorToMyService(error, errorInfo);
     }
@@ -20,7 +18,7 @@ class ErrorBoundary extends React.Component {
       //if the state has an error return a message to the user 
       if (errorMessage) {
         // You can render any custom fallback UI
-        return errorMessage;
+        return <h1>User not found.</h1>;
       }
     }
   }
