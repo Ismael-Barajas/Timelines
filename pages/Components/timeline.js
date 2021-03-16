@@ -23,15 +23,15 @@ const Timeline = (props) => {
 
   return (
     <div>
-      <h1 className={'ownerTitle'}>{ownerName}</h1>
+      <h1 className={"ownerTitle"}>{ownerName}</h1>
       <TimeLines align="alternate">
         {timelineData.map((item, index) => (
-          <TimelineItem>
+          <TimelineItem key={index}>
             <TimelineSeparator>
               <TimelineDot />
               <TimelineConnector />
             </TimelineSeparator>
-            <TimelineContent key={index}>
+            <TimelineContent>
               <div>
                 <h2> {item.name} </h2>
                 {item.description && (
