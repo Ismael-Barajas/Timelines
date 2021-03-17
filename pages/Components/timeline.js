@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import TimeLines from "@material-ui/lab/Timeline";
-
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import{
+  Card,
+  CardContent
+} from '@material-ui/core';
 // import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 import {
+  Timeline as TimeLines,
   TimelineItem,
   TimelineSeparator,
   TimelineConnector,
@@ -55,7 +55,7 @@ const Timeline = (props) => {
       <h1 align="center" className={'ownerTitle'}>{ownerName}</h1>
       <TimeLines align="alternate">
         {timelineData.map((item, index) => (
-          <TimelineItem>
+          <TimelineItem key={index}>
             <TimelineSeparator>
               <TimelineDot />
               <TimelineConnector />
