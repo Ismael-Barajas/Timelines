@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./Components/searchbar";
 import Timeline from "./Components/timeline";
+import ErrorBoundary from "./Components/error";
 
 const SearchPage = () => {
   // activities list to pass to timeline component
@@ -31,9 +32,7 @@ const SearchPage = () => {
         <SearchBar search={search} />
         {
           error ?
-              <div>
-                <h1>{error}</h1>
-              </div> : <Timeline data={activitiesList} />
+              <ErrorBoundary errorMessage={error} /> : <Timeline data={activitiesList} />
         }
       </div>
   )
