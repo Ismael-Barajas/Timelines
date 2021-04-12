@@ -1,9 +1,9 @@
 .paper {
   width: 80vw !important;
-  background-color: #6d9387 !important;
+  background-color: #2e2e2e !important;
 }
 
 .cards {
-  background-color: #cedbd8 !important;
-  color: black !important;
+  background-color: #e9ecc3 !important;
+  color: rgb(75, 75, 75) !important;
 }

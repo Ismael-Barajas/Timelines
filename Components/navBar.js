@@ -16,7 +16,7 @@ const Navbar = () => {
           layout="intrinsic"
         />
         <Typography variant="h3" className={styles.text}>
-          Github TimeLines
+          Github Timelines
         </Typography>
       </Toolbar>
     </AppBar>

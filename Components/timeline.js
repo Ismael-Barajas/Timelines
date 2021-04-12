@@ -46,7 +46,7 @@ const Timeline = (props) => {
           component="form"
           className={styles.paper}
           elevation={3}
-          // style={{ color: "#D3C6B7" }}
+          style={{ color: "#D3C6B7" }}
         >
           <h1 align="center" className={"ownerTitle"}>
             {ownerName}
@@ -73,7 +73,7 @@ const Timeline = (props) => {
                     <Card
                       className={styles.cards}
                       variant="outlined"
-                      //style={{ backgroundColor: "#CEDBD8", color: "black" }}
+                      // style={{ backgroundColor: "#CEDBD8", color: "black" }}
                     >
                       <CardContent align="center">
                         <h2> {item.name} </h2>
