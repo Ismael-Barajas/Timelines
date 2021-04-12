@@ -4,7 +4,7 @@ import Timeline from "../Components/timeline";
 import ErrorBoundary from "../Components/error";
 import Homepage from "../Components/homepage";
 import Navbar from "../Components/navBar";
-import ScrollButton from "../components/scrollButton";
+import ScrollButton from "../Components/scrollButton";
 
 const SearchPage = () => {
   // activities list to pass to timeline component
