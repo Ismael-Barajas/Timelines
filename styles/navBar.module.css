@@ -1,0 +1,11 @@
+.navbar {
+  min-height: 70px;
+  background-color: #141515 !important;
+  align-items: center;
+}
+
+.text {
+  font-family: "Times New Roman", Times, serif !important;
+  margin-top: 5px !important;
+  color: rgb(184, 214, 200);
+}
