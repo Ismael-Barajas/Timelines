@@ -26,7 +26,7 @@ const SearchPage = () => {
             // receive back some json error message or user has no data to show
             const errorMessage = json.message
               ? json.message
-              : `${searchValue} has no GitHub activity to show`;
+              : `${searchValue} has no GitHub repositories to show.`;
             setError(errorMessage);
             setActivitiesList([]);
           }

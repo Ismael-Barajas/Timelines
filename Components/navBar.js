@@ -15,9 +15,11 @@ const Navbar = () => {
           height={60}
           layout="intrinsic"
         />
-        <Typography variant="h3" className={styles.text}>
-          Github TimeLines
-        </Typography>
+        <a href="/">
+          <Typography variant="h3" className={styles.text}>
+            TimeLines
+          </Typography>
+        </a>
       </Toolbar>
     </AppBar>
   );

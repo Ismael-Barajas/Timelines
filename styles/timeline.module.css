@@ -7,3 +7,13 @@
   background-color: #cedbd8 !important;
   color: black !important;
 }
+
+.usernameDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.h1tag {
+  margin-left: 5px;
+}
