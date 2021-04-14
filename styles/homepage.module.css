@@ -1,6 +1,12 @@
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:0.6; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:0.6; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:0.6; } }
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,700&display=swap");
+
+.container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
 
 .homeimage {
   
@@ -19,5 +25,13 @@
 	animation-duration:1s;
 }
 
-
-
+.text {
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  width: 80%;
+  font-size: 2.5vw !important;
+  color: #edd8ca;
+  font-family: "Montserrat", sans-serif !important;
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+}

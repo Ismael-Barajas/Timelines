@@ -1,0 +1,17 @@
+.mainDiv {
+  text-align: center;
+}
+
+.paper {
+  /* width: 80vw !important; */
+  background-color: #6d9387 !important;
+  justify-content: center !important;
+  text-align: center;
+  margin: 20px;
+  padding: 20px 20px;
+}
+
+.text {
+  color: rgb(46, 43, 39);
+  font-family: "Montserrat", sans-serif !important;
+}

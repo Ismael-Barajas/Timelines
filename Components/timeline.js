@@ -1,5 +1,3 @@
-//import React from "react";
-//import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Grid, Paper } from "@material-ui/core";
 import {
   Timeline as TimeLines,
@@ -13,12 +11,11 @@ import {
 import moment from "moment";
 import ScrollAnimation from "react-animate-on-scroll";
 import styles from "../styles/timeline.module.css";
-import 'animate.css/animate.compat.css'
-
+import "animate.css/animate.compat.css";
+import Image from "next/image";
 
 const Timeline = (props) => {
   const timelineData = props.data;
-
 
   if (timelineData && !timelineData.length) {
     return null;
@@ -28,6 +25,8 @@ const Timeline = (props) => {
     timelineData.length && timelineData[0].owner.login
       ? timelineData[0].owner.login
       : "";
+  const ownerURL = timelineData[0].owner.html_url;
+  const ownerAvatar = timelineData[0].owner.avatar_url;
 
   timelineData.sort((a, b) => {
     return Date.parse(b.updated_at) - Date.parse(a.updated_at);
@@ -42,21 +41,26 @@ const Timeline = (props) => {
       justify="center"
     >
       <Grid item xs={12}>
-        <Paper
-          component="form"
-          className={styles.paper}
-          elevation={3}
-          style={{ color: "#D3C6B7" }}
-        >
-          <h1 align="center" className={"ownerTitle"}>
-            {ownerName}
-          </h1>
+        <Paper component="form" className={styles.paper} elevation={8}>
+          <div className={styles.usernameDiv}>
+            <Image
+              src={ownerAvatar}
+              alt="avatar"
+              width="50"
+              height="50"
+              layout="intrinsic"
+            />
+            <h1 className={styles.h1tag}>
+              <a href={ownerURL} target="_blank">
+                {ownerName}
+              </a>
+            </h1>
+          </div>
           <TimeLines align="alternate">
             {timelineData.map((item, index) => (
               <TimelineItem key={index}>
                 <TimelineOppositeContent>
-                  <ScrollAnimation animateIn='fadeInUp'
-                    animateOnce={true}>
+                  <ScrollAnimation animateIn="fadeInUp" animateOnce={true}>
                     <p>
                       <b>Last Updated at: </b>
                       {moment(item.updated_at).format("MMM DD, YYYY")}
@@ -68,23 +72,20 @@ const Timeline = (props) => {
                   <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent key={index}>
-                  <ScrollAnimation animateIn='fadeInUp'
-                  animateOnce={true}>
-                    <Card
-                      className={styles.cards}
-                      variant="outlined"
-                      // style={{ backgroundColor: "#CEDBD8", color: "black" }}
-                    >
-                      <CardContent align="center">
-                        <h2> {item.name} </h2>
-                        {item.description && (
-                          <p>
-                            <b>Description: </b>
-                            {item.description}
-                          </p>
-                        )}
-                      </CardContent>
-                    </Card>
+                  <ScrollAnimation animateIn="fadeInUp" animateOnce={true}>
+                    <a href={item.html_url} target="_blank">
+                      <Card className={styles.cards} variant="outlined">
+                        <CardContent align="center">
+                          <h2> {item.name} </h2>
+                          {item.description && (
+                            <p>
+                              <b>Description: </b>
+                              {item.description}
+                            </p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </a>
                   </ScrollAnimation>
                 </TimelineContent>
               </TimelineItem>

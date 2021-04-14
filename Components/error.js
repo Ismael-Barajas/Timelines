@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image'
 
+import styles from "../styles/error.module.css";
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
