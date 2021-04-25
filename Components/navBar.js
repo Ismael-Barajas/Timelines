@@ -1,11 +1,26 @@
 import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
 import { signIn, signOut, useSession } from "next-auth/client";
+import { Octokit } from "@octokit/core";
 import Image from "next/image";
+import React, { useEffect } from "react";
 
 import styles from "../styles/navBar.module.css";
 
 const Navbar = () => {
   const [session] = useSession();
+
+  useEffect(() => {
+    if (session) {
+      getRate();
+      console.log(231);
+      console.log(session.accessToken);
+    }
+  }, []);
+
+  const getRate = async () => {
+    const octokit = new Octokit({ auth: `${session.accessToken}` });
+    //const rateLimit = await octokit.request("GET /rate_limit");
+  };
 
   return (
     <AppBar className={styles.navbar} position="sticky">
@@ -33,7 +48,7 @@ const Navbar = () => {
           </Button>
         ) : (
           <Button variant="contained" color="secondary" onClick={signOut}>
-            {session.user.name}, Sign Out
+            {session.user.name}, Sign Out {session.accessToken}
           </Button>
         )}
       </Toolbar>
