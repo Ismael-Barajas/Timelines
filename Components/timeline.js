@@ -17,6 +17,7 @@ import {
   Code as CodeIcon,
   Visibility as VisibilityIcon,
   DeviceHub as DeviceHubIcon,
+  Star as StarIcon,
 } from "@material-ui/icons";
 
 const Timeline = (props) => {
@@ -105,6 +106,14 @@ const Timeline = (props) => {
                               </div>
                               <div className={styles.indivItems}>
                                 {item.watchers_count}
+                              </div>
+                            </div>
+                            <div className={styles.indivContainer}>
+                              <div>
+                                <StarIcon />
+                              </div>
+                              <div className={styles.indivItems}>
+                                {item.stargazers_count}
                               </div>
                             </div>
                             <div className={styles.indivContainer}>
