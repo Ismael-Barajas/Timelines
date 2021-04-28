@@ -17,3 +17,18 @@
 .h1tag {
   margin-left: 5px;
 }
+
+.indivContainer {
+  display: flex;
+  margin-right: 10px;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.indivItems {
+  margin-left: 3px;
+}
