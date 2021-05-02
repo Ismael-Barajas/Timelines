@@ -19,7 +19,9 @@ class ErrorBoundary extends React.Component {
             <Typography variant="h4" gutterBottom className={styles.text}>
               <b> Username {!!errorMessage && errorMessage}</b>
             </Typography>
-            <Image src="/3x.gif" alt="github logo" width="170" height="170" />
+            <Image src="/confuseddog.gif" alt="dog gif" width="200" height="200" />
+            <Image src ="/confusedcat.gif" alt="gif" width ="200" height ="200" />
+            <Image src ="/confusedhusky.gif" alt="gif" width ="200" height ="200" />
           </Paper>
         </Grid>
       </Grid>
