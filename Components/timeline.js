@@ -13,6 +13,12 @@ import ScrollAnimation from "react-animate-on-scroll";
 import styles from "../styles/timeline.module.css";
 import "animate.css/animate.compat.css";
 import Image from "next/image";
+import {
+  Code as CodeIcon,
+  Visibility as VisibilityIcon,
+  DeviceHub as DeviceHubIcon,
+  Star as StarIcon,
+} from "@material-ui/icons";
 
 const Timeline = (props) => {
   const timelineData = props.data;
@@ -83,6 +89,42 @@ const Timeline = (props) => {
                               {item.description}
                             </p>
                           )}
+                          <div className={styles.iconContainer}>
+                            {item.language && (
+                              <div className={styles.indivContainer}>
+                                <div>
+                                  <CodeIcon />
+                                </div>
+                                <div className={styles.indivItems}>
+                                  {item.language}
+                                </div>
+                              </div>
+                            )}
+                            <div className={styles.indivContainer}>
+                              <div>
+                                <VisibilityIcon />
+                              </div>
+                              <div className={styles.indivItems}>
+                                {item.watchers_count}
+                              </div>
+                            </div>
+                            <div className={styles.indivContainer}>
+                              <div>
+                                <StarIcon />
+                              </div>
+                              <div className={styles.indivItems}>
+                                {item.stargazers_count}
+                              </div>
+                            </div>
+                            <div className={styles.indivContainer}>
+                              <div>
+                                <DeviceHubIcon />
+                              </div>
+                              <div className={styles.indivItems}>
+                                {item.forks}
+                              </div>
+                            </div>
+                          </div>
                         </CardContent>
                       </Card>
                     </a>
