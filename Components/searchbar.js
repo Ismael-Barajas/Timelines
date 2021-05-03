@@ -7,6 +7,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const classes = useStyles();
+  const router = useRouter();
 
   const handleInputOnChange = (e) => {
     setSearchValue(e.target.value);
@@ -40,6 +42,11 @@ const SearchBar = (props) => {
   const callOnSearchEvent = (e) => {
     e.preventDefault();
     props.search(searchValue);
+    router.push(
+        { pathname: "/", query: { searchID: searchValue } },
+        undefined,
+        { shallow: true }
+    )
     resetInputField();
   };
 
