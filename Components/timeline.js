@@ -1,4 +1,13 @@
-import { Card, CardContent, Grid, Paper } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Paper,
+  Switch,
+  Typography,
+} from "@material-ui/core";
 import {
   Timeline as TimeLines,
   TimelineItem,
@@ -21,11 +30,14 @@ import {
 } from "@material-ui/icons";
 
 const Timeline = (props) => {
-  const timelineData = props.data;
-
-  if (timelineData && !timelineData.length) {
+  const isempty = props.data;
+  if (isempty && !isempty.length) {
     return null;
   }
+
+  const [timelineData, setTimelineData] = useState(props.data);
+  const [isDescending, setIsDescending] = useState(false);
+  //const [isLoading, setLoading] = useState(true);
 
   const ownerName =
     timelineData.length && timelineData[0].owner.login
@@ -34,9 +46,34 @@ const Timeline = (props) => {
   const ownerURL = timelineData[0].owner.html_url;
   const ownerAvatar = timelineData[0].owner.avatar_url;
 
-  timelineData.sort((a, b) => {
-    return Date.parse(b.updated_at) - Date.parse(a.updated_at);
-  });
+  useEffect(() => {
+    setTimelineData(
+      props.data.sort((a, b) => {
+        return Date.parse(b.updated_at) - Date.parse(a.updated_at);
+      })
+    );
+  }, [props.data]);
+
+  const handleSwitchChange = () => {
+    if (isDescending) {
+      setTimelineData(
+        timelineData.sort((a, b) => {
+          return Date.parse(b.updated_at) - Date.parse(a.updated_at);
+        })
+      );
+      setIsDescending(false);
+      console.log(timelineData);
+    } else {
+      setTimelineData(
+        timelineData.sort((a, b) => {
+          return Date.parse(a.updated_at) - Date.parse(b.updated_at);
+        })
+      );
+      setIsDescending(true);
+      console.log(timelineData);
+    }
+  };
+  console.log("outside", timelineData);
 
   return (
     <Grid
@@ -61,6 +98,19 @@ const Timeline = (props) => {
                 {ownerName}
               </a>
             </h1>
+            <Typography component="div">
+              <Grid component="label" container alignItems="center">
+                <Grid item>Latest</Grid>
+                <Grid item>
+                  <Switch
+                    checked={isDescending}
+                    color="primary"
+                    onChange={handleSwitchChange}
+                  />
+                </Grid>
+                <Grid item>Oldest</Grid>
+              </Grid>
+            </Typography>
           </div>
           <TimeLines align="alternate">
             {timelineData.map((item, index) => (
