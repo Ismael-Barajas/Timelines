@@ -19,12 +19,55 @@ import {
   DeviceHub as DeviceHubIcon,
   Star as StarIcon,
 } from "@material-ui/icons";
+import {useState} from "react";
 
 const Timeline = (props) => {
-  const timelineData = props.data;
+  const [isLoading, setIsLoading] = useState(true);
+  let timelineData = props.data;
+
+  const requestContributors = async (url) => {
+    let contributions;
+    let response = await fetch(url).then(res => res.json());
+      if (response && response.length) {
+        const owner = response.filter(contributor => ownerName === contributor.login);
+        if (owner && owner[0] && owner[0].contributions) {
+          contributions = owner[0].contributions;
+        }
+      }
+      return contributions;
+  }
 
   if (timelineData && !timelineData.length) {
     return null;
+  } else {
+    timelineData = timelineData.map(item => {
+      let itemData = {}
+      let contributions;
+      if (item && item.contributors_url) {
+        contributions = Promise.resolve(requestContributors(item.contributors_url)).then(value => {
+          setIsLoading(false);
+        });
+      }
+      itemData = {
+         owner: {
+           login: item.owner.login,
+           html_url: item.owner.html_url,
+           avatar_url: item.owner.avatar_url,
+         },
+        updated_at: item.updated_at,
+        html_url: item.html_url,
+        name: item.name,
+        description: item.description,
+        homepage: item.homepage,
+        language: item.language,
+        watchers_count: item.watchers_count,
+        stargazers_count: item.stargazers_count,
+        forks: item.forks,
+        contributors_url: item.contributors_url,
+        contributions,
+      }
+      return itemData;
+    })
   }
 
   const ownerName =
@@ -62,85 +105,94 @@ const Timeline = (props) => {
               </a>
             </h1>
           </div>
-          <TimeLines align="alternate">
-            {timelineData.map((item, index) => (
-              <TimelineItem key={index}>
-                <TimelineOppositeContent>
-                  <ScrollAnimation animateIn="fadeInUp" animateOnce={true}>
-                    <p>
-                      <b>Last Updated at: </b>
-                      {moment(item.updated_at).format("MMM DD, YYYY")}
-                    </p>
-                  </ScrollAnimation>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent key={index}>
-                  <ScrollAnimation animateIn="fadeInUp" animateOnce={true}>
-                    <a href={item.html_url} target="_blank">
-                      <Card className={styles.cards} variant="outlined">
-                        <CardContent align="center">
-                          <h2> {item.name} </h2>
-                          {item.description && (
-                            <p>
-                              <b>Description: </b>
-                              {item.description}
-                            </p>
-                          )}
-                          {item.homepage && (
-                            <p>
-                              <b>HomePage: </b>
-                              <a href={item.homepage} target="_blank">
-                                <u>{item.homepage}</u>
-                              </a>
-                            </p>
-                          )}
-                          <div className={styles.iconContainer}>
-                            {item.language && (
-                              <div className={styles.indivContainer}>
-                                <div>
-                                  <CodeIcon />
+          {
+            !isLoading &&
+            <TimeLines align="alternate">
+              {timelineData.map((item, index) => (
+                  <TimelineItem key={index}>
+                    <TimelineOppositeContent>
+                      <ScrollAnimation animateIn="fadeInUp" animateOnce={true}>
+                        <p>
+                          <b>Last Updated at: </b>
+                          {moment(item.updated_at).format("MMM DD, YYYY")}
+                        </p>
+                      </ScrollAnimation>
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineDot />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent key={index}>
+                      <ScrollAnimation animateIn="fadeInUp" animateOnce={true}>
+                        <a href={item.html_url} target="_blank">
+                          <Card className={styles.cards} variant="outlined">
+                            <CardContent align="center">
+                              <h2> {item.name} </h2>
+                              {item.description && (
+                                  <p>
+                                    <b>Description: </b>
+                                    {item.description}
+                                  </p>
+                              )}
+                              {item.homepage && (
+                                  <p>
+                                    <b>HomePage: </b>
+                                    <a href={item.homepage} target="_blank">
+                                      <u>{item.homepage}</u>
+                                    </a>
+                                  </p>
+                              )}
+                              {!!item.contributions && (
+                                  <p>
+                                    <b>Contributions Made: </b>
+                                    { item.contributions || '' }
+                                  </p>
+                              )}
+                              <div className={styles.iconContainer}>
+                                {item.language && (
+                                    <div className={styles.indivContainer}>
+                                      <div>
+                                        <CodeIcon />
+                                      </div>
+                                      <div className={styles.indivItems}>
+                                        {item.language}
+                                      </div>
+                                    </div>
+                                )}
+                                <div className={styles.indivContainer}>
+                                  <div>
+                                    <VisibilityIcon />
+                                  </div>
+                                  <div className={styles.indivItems}>
+                                    {item.watchers_count}
+                                  </div>
                                 </div>
-                                <div className={styles.indivItems}>
-                                  {item.language}
+                                <div className={styles.indivContainer}>
+                                  <div>
+                                    <StarIcon />
+                                  </div>
+                                  <div className={styles.indivItems}>
+                                    {item.stargazers_count}
+                                  </div>
+                                </div>
+                                <div className={styles.indivContainer}>
+                                  <div>
+                                    <DeviceHubIcon />
+                                  </div>
+                                  <div className={styles.indivItems}>
+                                    {item.forks}
+                                  </div>
                                 </div>
                               </div>
-                            )}
-                            <div className={styles.indivContainer}>
-                              <div>
-                                <VisibilityIcon />
-                              </div>
-                              <div className={styles.indivItems}>
-                                {item.watchers_count}
-                              </div>
-                            </div>
-                            <div className={styles.indivContainer}>
-                              <div>
-                                <StarIcon />
-                              </div>
-                              <div className={styles.indivItems}>
-                                {item.stargazers_count}
-                              </div>
-                            </div>
-                            <div className={styles.indivContainer}>
-                              <div>
-                                <DeviceHubIcon />
-                              </div>
-                              <div className={styles.indivItems}>
-                                {item.forks}
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </a>
-                  </ScrollAnimation>
-                </TimelineContent>
-              </TimelineItem>
-            ))}
-          </TimeLines>
+                            </CardContent>
+                          </Card>
+                        </a>
+                      </ScrollAnimation>
+                    </TimelineContent>
+                  </TimelineItem>
+              ))}
+            </TimeLines>
+          }
         </Paper>
       </Grid>
     </Grid>

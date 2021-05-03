@@ -28,26 +28,26 @@ const SearchPage = () => {
     });
 
   // Prop function passed to searchbar
-  const search = (searchValue) => {
-      const url = `https://api.github.com/users/${searchValue}/repos`;
-      fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-          if (json) {
-              if (json.length) {
-                setActivitiesList(json);
-                setError("");
-              } else if (json.message || !json.length) {
-                // receive back some json error message or user has no data to show
-                const errorMessage = json.message
-                  ? json.message
-                  : `${searchValue} has no GitHub repositories to show.`;
-                setError(errorMessage);
-                setActivitiesList([]);
-              }
-        }
-      });
-  };
+    const search = (searchValue) => {
+        const url = `https://api.github.com/users/${searchValue}/repos`;
+        fetch(url)
+            .then((response) => response.json())
+            .then((json) => {
+                if (json) {
+                    if (json.length) {
+                        setActivitiesList(json);
+                        setError("");
+                    } else if (json.message || !json.length) {
+                        // receive back some json error message or user has no data to show
+                        const errorMessage = json.message
+                            ? json.message
+                            : `${searchValue} has no GitHub repositories to show.`;
+                        setError(errorMessage);
+                        setActivitiesList([]);
+                    }
+                }
+            });
+    };
 
   return (
     <div>
