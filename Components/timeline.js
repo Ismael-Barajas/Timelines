@@ -89,6 +89,14 @@ const Timeline = (props) => {
                               {item.description}
                             </p>
                           )}
+                          {item.homepage && (
+                            <p>
+                              <b>HomePage: </b>
+                              <a href={item.homepage} target="_blank">
+                                <u>{item.homepage}</u>
+                              </a>
+                            </p>
+                          )}
                           <div className={styles.iconContainer}>
                             {item.language && (
                               <div className={styles.indivContainer}>
