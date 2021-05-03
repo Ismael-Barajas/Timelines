@@ -8,6 +8,19 @@
   color: black !important;
 }
 
+.shareCard {
+  background-color: #cedbd8 !important;
+  color: black !important;
+  width: 65vw !important;
+  margin-bottom: 15px;
+}
+
+.shareDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .usernameDiv {
   display: flex;
   align-items: center;
