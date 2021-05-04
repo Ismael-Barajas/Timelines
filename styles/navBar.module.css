@@ -9,3 +9,14 @@
   margin-top: 5px !important;
   color: rgb(184, 214, 200);
 }
+
+.aboutButton {
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
+  margin-top: 16px;
+}
+
+.button {
+  color: rgb(184, 214, 200) !important;
+}
