@@ -8,46 +8,61 @@ import ScrollButton from "../Components/scrollButton";
 import { useRouter } from "next/router";
 
 const SearchPage = () => {
-    const router = useRouter();
-    const {
-        query: { searchID },
-    } = router;
+  const router = useRouter();
+  const {
+    query: { searchID },
+  } = router;
   // activities list to pass to timeline component
   const [activitiesList, setActivitiesList] = useState([]);
   // state for setting error messages returned - pass to error component
   const [error, setError] = useState("");
   const [queryValue, setQueryValue] = useState("");
 
-    useEffect(() => {
-        if (searchID && !queryValue) {
-            setQueryValue(searchID);
-            search(searchID);
-        } else if (searchID !== queryValue) {
-            setQueryValue(searchID);
-        }
-    });
+  useEffect(() => {
+    if (searchID && !queryValue) {
+      setQueryValue(searchID);
+      search(searchID);
+    } else if (searchID !== queryValue) {
+      setQueryValue(searchID);
+    }
+  });
 
   // Prop function passed to searchbar
-    const search = (searchValue) => {
-        const url = `https://api.github.com/users/${searchValue}/repos`;
-        fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
-                if (json) {
-                    if (json.length) {
-                        setActivitiesList(json);
-                        setError("");
-                    } else if (json.message || !json.length) {
-                        // receive back some json error message or user has no data to show
-                        const errorMessage = json.message
-                            ? json.message
-                            : `${searchValue} has no GitHub repositories to show.`;
-                        setError(errorMessage);
-                        setActivitiesList([]);
-                    }
-                }
-            });
-    };
+  const search = (searchValue) => {
+    const url = `https://api.github.com/users/${searchValue}/repos`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        if (json) {
+          if (json.length) {
+            let callsToMake = json.map((result) =>
+              fetch(result.contributorUrl)
+            );
+            Promise.all(callsToMake)
+              .then((contributorResults) => {
+                console.log("contributorResults", contributorResults);
+                // i can use this json
+                // need to insert or create a new array of objects with the information we need.
+                // do processing
+
+                // setActivitiesList
+                json;
+              })
+              .catch((error) => setError(error));
+            // json[0].owner.login
+            //   setActivitiesList(json);
+            //   setError("");
+          } else if (json.message || !json.length) {
+            // receive back some json error message or user has no data to show
+            const errorMessage = json.message
+              ? json.message
+              : `${searchValue} has no GitHub repositories to show.`;
+            setError(errorMessage);
+            setActivitiesList([]);
+          }
+        }
+      });
+  };
 
   return (
     <div>
