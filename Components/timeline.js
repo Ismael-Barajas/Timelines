@@ -44,8 +44,6 @@ const Timeline = (props) => {
     totalContributions += item.contributions;
   });
 
-  totalContributions = 1000;
-
   return (
     <Grid
       container
