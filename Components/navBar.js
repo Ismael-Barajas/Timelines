@@ -1,9 +1,12 @@
-import { AppBar, Typography, Toolbar } from "@material-ui/core";
+import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import styles from "../styles/navBar.module.css";
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
     <AppBar className={styles.navbar} position="sticky">
       <Toolbar>
@@ -21,6 +24,16 @@ const Navbar = () => {
           </Typography>
         </a>
       </Toolbar>
+      <div className={styles.aboutButton}>
+        <Button
+          variant="outlined"
+          onClick={() => router.push("/about")}
+          color="inherit"
+          className={styles.button}
+        >
+          About
+        </Button>
+      </div>
     </AppBar>
   );
 };
