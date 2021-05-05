@@ -2,9 +2,14 @@
   width: 80vw !important;
   background-color: #6d9387 !important;
   margin-top: 25px;
+  max-width: 1000px;
 }
 
 .cards {
   background-color: #cedbd8 !important;
   color: black !important;
+}
+
+.aboutUsHeader {
+  font-family: "Montserrat", sans-serif !important;
 }
