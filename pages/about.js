@@ -3,10 +3,14 @@ import { Card, CardContent, Grid, Paper, Typography } from "@material-ui/core";
 
 import styles from "../styles/about.module.css";
 import Image from "next/image";
+import Head from "next/head";
 
 const AboutPage = () => {
   return (
     <>
+      <Head>
+        <title>About Us</title>
+      </Head>
       <Navbar />
       <Grid
         container

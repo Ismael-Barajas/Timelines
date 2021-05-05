@@ -119,15 +119,11 @@ const Timeline = (props) => {
                       <Card className={styles.cards} variant="outlined">
                         <CardContent align="center">
                           <h2> {item.name} </h2>
-                          {item.description && (
-                            <p>
-                              <b>Description: </b>
-                              {item.description}
-                            </p>
-                          )}
+                          {item.description && <p>{item.description}</p>}
                           {item.homepage && (
                             <p>
                               <b>HomePage: </b>
+                              <br />
                               <a href={item.homepage} target="_blank">
                                 <u>{item.homepage}</u>
                               </a>
