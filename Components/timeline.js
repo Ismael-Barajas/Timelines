@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, Paper } from "@material-ui/core";
+import { Button, Card, CardContent, Grid, Paper } from "@material-ui/core";
 import {
   Timeline as TimeLines,
   TimelineItem,
@@ -18,6 +18,7 @@ import {
   Visibility as VisibilityIcon,
   DeviceHub as DeviceHubIcon,
   Star as StarIcon,
+  Assignment as AssignmentIcon,
 } from "@material-ui/icons";
 import CountUp from "react-countup";
 
@@ -183,6 +184,33 @@ const Timeline = (props) => {
             ))}
           </TimeLines>
         </Paper>
+        <div className={styles.shareDiv}>
+          <Card className={styles.shareCard} variant="outlined">
+            <CardContent align="center">
+              <h2>
+                Share{" "}
+                <Image
+                  src={ownerAvatar}
+                  alt="avatar"
+                  width="30"
+                  height="30"
+                  layout="intrinsic"
+                />{" "}
+                {ownerName}'s TimeLine!
+              </h2>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert("Url Copied to ClipBoard!");
+                }}
+              >
+                <AssignmentIcon />
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </Grid>
     </Grid>
   );
