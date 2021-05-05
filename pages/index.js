@@ -6,6 +6,7 @@ import Homepage from "../Components/homepage";
 import Navbar from "../Components/navBar";
 import ScrollButton from "../Components/scrollButton";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -139,6 +140,9 @@ const SearchPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>TimeLines</title>
+      </Head>
       <Navbar />
       <Homepage />
       <SearchBar search={search} />
