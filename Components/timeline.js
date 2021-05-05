@@ -20,9 +20,11 @@ import {
   Star as StarIcon,
   Assignment as AssignmentIcon,
 } from "@material-ui/icons";
+import CountUp from "react-countup";
 
 const Timeline = (props) => {
-  const timelineData = props.data;
+  let timelineData = props.data;
+  let totalContributions = 0;
 
   if (timelineData && !timelineData.length) {
     return null;
@@ -39,6 +41,10 @@ const Timeline = (props) => {
     return Date.parse(b.updated_at) - Date.parse(a.updated_at);
   });
 
+  timelineData.forEach((item) => {
+    totalContributions += item.contributions;
+  });
+
   return (
     <Grid
       container
@@ -49,19 +55,48 @@ const Timeline = (props) => {
     >
       <Grid item xs={12}>
         <Paper component="form" className={styles.paper} elevation={8}>
-          <div className={styles.usernameDiv}>
-            <Image
-              src={ownerAvatar}
-              alt="avatar"
-              width="50"
-              height="50"
-              layout="intrinsic"
-            />
-            <h1 className={styles.h1tag}>
-              <a href={ownerURL} target="_blank">
-                {ownerName}
-              </a>
-            </h1>
+          <div className={styles.headDiv}>
+            <Card className={styles.headCard} variant="outlined">
+              <CardContent align="center">
+                <div className={styles.usernameDiv}>
+                  <Image
+                    src={ownerAvatar}
+                    alt="avatar"
+                    width="50"
+                    height="50"
+                    layout="intrinsic"
+                  />
+                  <h1 className={styles.h1tag}>
+                    <a href={ownerURL} target="_blank">
+                      {ownerName}
+                    </a>
+                  </h1>
+                </div>
+                <div
+                  className={
+                    totalContributions >= 1000
+                      ? styles.totalContribDiv1000
+                      : totalContributions >= 100 && totalContributions < 1000
+                      ? styles.totalContribDiv100
+                      : totalContributions >= 50 && totalContributions < 100
+                      ? styles.totalContribDiv50
+                      : totalContributions >= 10 && totalContributions < 50
+                      ? styles.totalContribDiv10
+                      : styles.totalContribDiv
+                  }
+                >
+                  <h2>
+                    Total Contributions Made:{" "}
+                    <CountUp
+                      start={1000000}
+                      end={totalContributions}
+                      duration={4.5}
+                      separator=","
+                    />
+                  </h2>
+                </div>
+              </CardContent>
+            </Card>
           </div>
           <TimeLines align="alternate">
             {timelineData.map((item, index) => (
@@ -98,6 +133,10 @@ const Timeline = (props) => {
                               </a>
                             </p>
                           )}
+                          <p className={styles.contributions}>
+                            <b>Contributions Made: </b>
+                            {item.contributions}
+                          </p>
                           <div className={styles.iconContainer}>
                             {item.language && (
                               <div className={styles.indivContainer}>

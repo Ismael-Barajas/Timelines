@@ -45,3 +45,66 @@
 .indivItems {
   margin-left: 3px;
 }
+
+.contributions {
+  color: black;
+}
+
+.headDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headCard {
+  background-color: #cedbd8 !important;
+  color: black !important;
+  width: 50vw !important;
+  margin-top: 20px;
+}
+
+.totalContribDiv {
+  background-color: #cedbd8 !important;
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+  box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+}
+
+.totalContribDiv10 {
+  background-color: #edd8ca !important;
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+  box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+}
+
+.totalContribDiv50 {
+  background-color: rgb(240, 202, 255) !important;
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+  box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+}
+
+.totalContribDiv100 {
+  background-color: rgb(174, 229, 255) !important;
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+  box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+}
+
+.totalContribDiv1000 {
+  background: linear-gradient(
+    124deg,
+    #ff2400,
+    #e81d1d,
+    #e8b71d,
+    #e3e81d,
+    #1de840,
+    #1ddde8,
+    #2b1de8,
+    #dd00f3,
+    #dd00f3
+  );
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+  box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.26) !important;
+}
