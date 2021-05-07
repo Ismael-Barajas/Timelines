@@ -84,21 +84,19 @@ const AboutPage = () => {
                 <Typography variant="h6" className={styles.aboutUsHeader}>
                   Visit the repo here
                 </Typography>
-                <Typography>
-                  <a
-                    href="https://github.com/Ismael-Barajas/Timelines"
-                    target="_blank"
-                  >
-                    <Image
-                      src="/github-logo.png"
-                      alt="logo"
-                      quality={100}
-                      width={60}
-                      height={60}
-                      layout="intrinsic"
-                    />
-                  </a>
-                </Typography>
+                <a
+                  href="https://github.com/Ismael-Barajas/Timelines"
+                  target="_blank"
+                >
+                  <Image
+                    src="/github-logo.png"
+                    alt="logo"
+                    quality={100}
+                    width={60}
+                    height={60}
+                    layout="intrinsic"
+                  />
+                </a>
               </CardContent>
             </Card>
           </Paper>
