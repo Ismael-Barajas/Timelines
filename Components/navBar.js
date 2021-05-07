@@ -1,5 +1,6 @@
 import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -24,11 +25,13 @@ const Navbar = () => {
           height={60}
           layout="intrinsic"
         />
-        <a href="/">
-          <Typography variant="h3" className={styles.text}>
-            TimeLines
-          </Typography>
-        </a>
+        <Link href="/">
+          <a>
+            <Typography variant="h3" className={styles.text}>
+              TimeLines
+            </Typography>
+          </a>
+        </Link>
       </Toolbar>
       <div className={styles.aboutButton}>
         <Button
