@@ -1,11 +1,17 @@
 import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import styles from "../styles/navBar.module.css";
 
 const Navbar = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    // Prefetch the about page
+    router.prefetch("/about");
+  }, []);
 
   return (
     <AppBar className={styles.navbar} position="sticky">
